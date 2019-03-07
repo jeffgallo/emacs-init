@@ -1,0 +1,21 @@
+cd Repos/
+ls
+cd TeamClock/
+npm start
+npm
+brew install
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ENV
+cd Repos/TeamClock/
+npm start
+env
+npm start
+npm --h
+env
+ls
+cd Repos/TeamClock/
+*npm start
+source ~/.bashrc
+dired
+dired ~/Repos/TeamClock
+exit

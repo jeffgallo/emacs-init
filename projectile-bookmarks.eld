@@ -1,0 +1,1 @@
+("~/Repos/tnew7/" "~/Repos/qmk_firmware/" "~/Repos/ntf_site_gatsby/" "~/Repos/my-blog/" "~/Repos/TeamClock/" "~/Repos/AccessControlScanner_RN/" "~/Repos/ACAOnlineFrontEnd/")

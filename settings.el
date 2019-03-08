@@ -1,7 +1,7 @@
 ;; [[file:~/.emacs.d/settings.org::*require][require:1]]
 (setq package-selected-packages
       (quote
-       (helm helm-dash eslint-fix magithub powerline-evil rw-ispell emmet-mode web-mode paredit flycheck-clojure flycheck-gradle flycheck-popup-tip flyparens helm-flycheck helm-flyspell rainbow-delimiters rainbow-mode paren-completer paren-face projectile cider clojure-mode helm-projectile helm-themes spotify which-key use-package ace-window mu4e-maildirs-extension  evil-tutor  flycheck flyspell-correct-helm magit)))
+       (helm helm-dash eslint-fix magithub powerline-evil rw-ispell web-mode paredit flycheck-clojure flycheck-gradle flycheck-popup-tip flyparens helm-flycheck helm-flyspell paren-completer paren-face projectile cider clojure-mode helm-projectile helm-themes spotify which-key use-package ace-window mu4e-maildirs-extension  evil-tutor  flycheck flyspell-correct-helm magit)))
 
 '(ring-bell-function (quote ignore))
 
@@ -58,6 +58,15 @@
 (setq display-line-numbers-type 'relative)
 (tool-bar-mode 0)
 (evil-mode 1)
+
+(use-package magithub
+:requires (magit magit-popup))
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch)
+
+(use-package rainbow-delimiters
+:ensure t)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;; interface tweaks:1 ends here
 
 ;; [[file:~/.emacs.d/settings.org::*Projectile][Projectile:1]]
@@ -1256,66 +1265,69 @@
 
 ;; [[file:~/.emacs.d/settings.org::*web-mode][web-mode:1]]
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+  (use-package rainbow-mode)
+    (defun my-web-mode-hook ()
+      "Hooks for Web mode."
+      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-code-indent-offset 2)
+      (setq web-mode-css-indent-offset 2)
+    )
+    (add-hook 'web-mode-hook  'my-web-mode-hook)  
+     (add-hook 'web-mode-hook 'httpd-start )
+    (add-hook 'web-mode-hook 'impatient-mode ) 
+(add-hook 'web-mode-hook 'rainbow-mode)
+    (setq tab-width 2)
 
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-)
-(add-hook 'web-mode-hook  'my-web-mode-hook)  
- (add-hook 'web-mode-hook 'httpd-start )
-(add-hook 'web-mode-hook 'impatient-mode ) 
-(setq tab-width 2)
-
-(setq web-mode-enable-current-column-highlight t)
-(setq web-mode-enable-current-element-highlight t)
+    (setq web-mode-enable-current-column-highlight t)
+    (setq web-mode-enable-current-element-highlight t)
 ;; web-mode:1 ends here
 
 ;; [[file:~/.emacs.d/settings.org::*javascript%20modes][javascript modes:1]]
 (use-package js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-(use-package ac-js2)
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+  (use-package ac-js2)
+(use-package rjsx-mode)
 
-(add-hook 'js-mode-hook 'js2-minor-mode)
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-(add-hook 'js-mode-hook
-          (lambda()
-            (flyspell-prog-mode)
-            ))
+  (add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js-mode-hook 'rjsx-minor-mode)
+  (add-hook 'js2-mode-hook 'ac-js2-mode)
+  (add-hook 'js-mode-hook
+            (lambda()
+              (flyspell-prog-mode)
+              ))
 
-;; Better imenu
-(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  ;; Better imenu
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
-(use-package js2-refactor)
-(use-package xref-js2
-:requires ag )
+  (use-package js2-refactor)
+  (use-package xref-js2
+  :requires ag )
 
 
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c C-r")
-(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
-(use-package tern )
-(use-package tern-auto-complete :requires tern)
-(add-hook 'js-mode-hook (lambda () (tern-mode t)))
-(eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
-(defun delete-tern-process ()
-  (interactive)
-  (delete-process "Tern"))
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (js2r-add-keybindings-with-prefix "C-c C-r")
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+  (use-package tern )
+  (use-package tern-auto-complete :requires tern)
+  (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+  (eval-after-load 'tern
+     '(progn
+        (require 'tern-auto-complete)
+        (tern-ac-setup)))
+  (defun delete-tern-process ()
+    (interactive)
+    (delete-process "Tern"))
 
-;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
-;; unbind it.
+  ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+  ;; unbind it.
 
-(define-key js-mode-map (kbd "M-.") nil)
+  (define-key js-mode-map (kbd "M-.") nil)
 
-(add-hook 'js2-mode-hook (lambda ()
-  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
-(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+  (add-hook 'js2-mode-hook (lambda ()
+    (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
 ;; javascript modes:1 ends here
 
 ;; [[file:~/.emacs.d/settings.org::*Typescript%20mode][Typescript mode:1]]

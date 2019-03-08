@@ -1,1 +1,1 @@
-("~/Repos/tnew7/" "~/Repos/qmk_firmware/" "~/Repos/ntf_site_gatsby/" "~/Repos/my-blog/" "~/Repos/TeamClock/" "~/Repos/AccessControlScanner_RN/" "~/Repos/ACAOnlineFrontEnd/")
+("~/.emacs.d/" "~/Repos/TeamClock/" "~/Repos/my-blog/" "~/Repos/tnew7/" "~/Repos/qmk_firmware/" "~/Repos/ntf_site_gatsby/" "~/Repos/AccessControlScanner_RN/" "~/Repos/ACAOnlineFrontEnd/")

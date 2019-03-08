@@ -1,0 +1,7 @@
+# ignore all
+*
+
+# but the actual init files
+!.gitignore
+!init.el
+!settings.org

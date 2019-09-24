@@ -3,7 +3,7 @@
 (require 'package)
 
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
+	     '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
 	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
@@ -43,10 +43,10 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote
-    ("~/Dropbox/org/Review.org" "~/Dropbox/org/TODO.org" "~/Dropbox/org/STRMLN.org" "~/Dropbox/org/Journal.org" "~/Dropbox/org/VAF.org" "~/Dropbox/org/REFILE.org")))
+    ("~/Dropbox/org/Review.org" "~/Dropbox/org/TODO.org" "~/Dropbox/org/STRMLN.org" "~/Dropbox/org/Journal.org" "~/Dropbox/org/REFILE.org")))
  '(package-selected-packages
    (quote
-    (magit-popup rjsx-mode impatient-mode ac-emmet typescript-mode tern auto-complete evil-visual-mark-mode evil-indent-textobject evil-surround evil-leader helm helm-dash eslint-fix powerline-evil rw-ispell emmet-mode web-mode paredit flycheck-clojure flycheck-gradle flycheck-popup-tip flyparens helm-flycheck helm-flyspell rainbow-delimiters rainbow-mode paren-completer paren-face projectile cider clojure-mode helm-projectile helm-themes spotify which-key use-package ace-window mu4e-maildirs-extension evil-tutor flycheck flyspell-correct-helm)))
+    (magit-popup php-mode rjsx-mode impatient-mode ac-emmet typescript-mode tern auto-complete evil-visual-mark-mode evil-indent-textobject evil-surround evil-leader helm helm-dash eslint-fix powerline-evil rw-ispell emmet-mode web-mode paredit flycheck-clojure flycheck-gradle flycheck-popup-tip flyparens helm-flycheck helm-flyspell rainbow-delimiters rainbow-mode paren-completer paren-face projectile cider clojure-mode helm-projectile helm-themes spotify which-key use-package ace-window mu4e-maildirs-extension evil-tutor flycheck flyspell-correct-helm)))
  '(ring-bell-function (quote ignore)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

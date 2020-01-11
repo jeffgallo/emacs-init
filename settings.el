@@ -51,7 +51,6 @@
 ;; [[file:~/.emacs.d/settings.org::*interface%20tweaks][interface tweaks:1]]
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<f5>") 'revert-buffer)
-
 (helm-mode 1)
 (global-set-key "\C-x\C-f" 'helm-find-files)
 
@@ -111,7 +110,7 @@
 ;; [[file:~/.emacs.d/settings.org::*Org-Mode][Org-Mode:1]]
 (setq org-src-tab-acts-natively t)
 
- 
+
   ; Enable habit tracking (and a bunch of other modules)
   (setq org-modules (quote (org-bbdb
                             org-bibtex
@@ -279,10 +278,11 @@
 
         ;; KEYWORDS    
         (setq org-todo-keywords
-              (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+              (quote ((sequence "TODO(t)" "PROJECT(p)" "NEXT(n)" "|" "DONE(d)")
                       (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
         (setq org-todo-keyword-faces
               (quote (("TODO" :foreground "red" :weight bold)
+                      ("PROJECT" :foreground "gold" :weight bold)
                       ("NEXT" :foreground "dodger blue" :weight bold)
                       ("DONE" :foreground "forest green" :weight bold)
                       ("WAITING" :foreground "orange" :weight bold)
@@ -589,11 +589,8 @@
                                   ("@office" . ?o)
                                   ("@home" . ?H)
                                   (:endgroup)
-                                  ("WAITING" . ?w)
-                                  ("HOLD" . ?h)
                                   ("PERSONAL" . ?P)
-                                  ("WORK" . ?W)
-                                  ("APPLY" . ?A)
+                                  ("OLIVER" . ?O)
                                   ("NOTE" . ?n)
                                   ("CANCELLED" . ?c)
                                   ("FLAGGED" . ??))))
@@ -613,7 +610,7 @@
       (defun org-habit-parse-todo (&optional pom))
 
       (defun bh/is-project-p ()
-        "Any task with a todo keyword subtask"
+        "Any PROJECT task with a todo keyword subtask"
         (save-restriction
           (widen)
           (let ((has-subtask)
@@ -1249,24 +1246,7 @@
       (setq org-startup-indented t)
 ;; Org-Mode:1 ends here
 
-;; [[file:~/.emacs.d/settings.org::*auto-complete%20mode][auto-complete mode:1]]
-(use-package auto-complete
-:ensure t
-:init
-(progn
-(ac-config-default)
-(global-auto-complete-mode t)
-))
-
-;; slime for autocomplete 
-(use-package ac-slime
-:requires slime)
-
- (add-hook 'slime-mode-hook 'set-up-slime-ac)
- (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
- (eval-after-load "auto-complete"
-   '(add-to-list 'ac-modes 'slime-repl-mode))
-
+;; [[file:~/.emacs.d/settings.org::*Emmet%20Mode][Emmet Mode:1]]
 ;; emmet mode 
 (use-package emmet-mode)
 (add-hook 'web-mode-hook  'emmet-mode) 
@@ -1280,7 +1260,17 @@
                (if (string= web-mode-cur-language "css")
     	   (setq emmet-use-css-transform t)
       	 (setq emmet-use-css-transform nil)))))
-;; auto-complete mode:1 ends here
+;; Emmet Mode:1 ends here
+
+;; [[file:~/.emacs.d/settings.org::*company%20mode][company mode:1]]
+(use-package company)
+  (use-package company-tabnine :ensure t)
+  (add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 1)
+(setq company-selection-wrap-around t)
+  (add-to-list 'company-backends #'company-tabnine)
+;; company mode:1 ends here
 
 ;; [[file:~/.emacs.d/settings.org::*web-mode][web-mode:1]]
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -1306,7 +1296,7 @@
 (use-package js2-mode)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.json$'" . js2-mode))
-  (use-package ac-js2)
+  ;;(use-package ac-js2)
 (use-package rjsx-mode)
 
   (add-hook 'js-mode-hook 'js2-minor-mode)
@@ -1329,12 +1319,12 @@
   (js2r-add-keybindings-with-prefix "C-c C-r")
   (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
   (use-package tern )
-  (use-package tern-auto-complete :requires tern)
+  (use-package company-tern :requires tern)
   (add-hook 'js-mode-hook (lambda () (tern-mode t)))
   (eval-after-load 'tern
      '(progn
-        (require 'tern-auto-complete)
-        (tern-ac-setup)))
+        (require 'company-tern)
+        ))
   (defun delete-tern-process ()
     (interactive)
     (delete-process "Tern"))

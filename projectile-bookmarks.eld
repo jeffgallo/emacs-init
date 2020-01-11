@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/Repos/STRMLN_Site/" "~/Repos/AccessControlScanner_RN/" "~/Repos/TeamClock/" "~/Repos/my-blog/" "~/Repos/tnew7/" "~/Repos/qmk_firmware/" "~/Repos/ntf_site_gatsby/" "~/Repos/ACAOnlineFrontEnd/")
+("~/.emacs.d/" "~/Repos/wine-tally/" "~/Repos/AccessControlScanner_RN/" "~/Repos/STRMLN_Site/" "~/Repos/TeamClock/" "~/Repos/my-blog/" "~/Repos/tnew7/" "~/Repos/qmk_firmware/" "~/Repos/ntf_site_gatsby/" "~/Repos/ACAOnlineFrontEnd/")

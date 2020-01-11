@@ -1,2 +1,2 @@
-;; org-clock-save.el - JeffreysMacBook.attlocal.net at <2019-09-23 Mon 09:00>
-(setq org-clock-stored-history '(("/Users/jeffgallo/Dropbox/org/TODO.org" . 36873) ("/Users/jeffgallo/Dropbox/org/Journal.org" . 227480)))
+;; org-clock-save.el - JeffreysMacBook.lan at <2020-01-02 Thu 17:24>
+(setq org-clock-stored-history '(("/Users/jeffgallo/Dropbox/org/REFILE.org" . 2247) ("/Users/jeffgallo/Dropbox/org/TODO.org" . 1) ("/Users/jeffgallo/Dropbox/org/Journal.org" . 267643) ("/Users/jeffgallo/Dropbox/org/REFILE.org" . 1848) ("/Users/jeffgallo/Dropbox/org/Journal.org" . 271500) ("/Users/jeffgallo/Dropbox/org/Journal.org" . 270205) ("/Users/jeffgallo/Dropbox/org/TODO.org" . 1223) ("/Users/jeffgallo/Dropbox/org/TODO.org" . 23644) ("/Users/jeffgallo/Dropbox/org/TODO.org" . 24718) ("/Users/jeffgallo/Dropbox/org/TODO.org" . 23961) ("/Users/jeffgallo/Dropbox/org/TODO.org" . 24053) ("/Users/jeffgallo/Dropbox/org/Journal.org" . 276826)))

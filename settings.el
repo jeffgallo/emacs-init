@@ -48,6 +48,12 @@
 (add-hook 'org-mode-hook 'flyspell-mode)
 ;; flyspell:1 ends here
 
+;; [[file:~/.emacs.d/settings.org::*org-Download][org-Download:1]]
+(use-package org-download)
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-download-enable)
+;; org-Download:1 ends here
+
 ;; [[file:~/.emacs.d/settings.org::*interface%20tweaks][interface tweaks:1]]
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<f5>") 'revert-buffer)
@@ -262,7 +268,7 @@
               (quote (("t" "todo" entry (file "~/Dropbox/org/REFILE.org")
                        "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
                       ("r" "respond" entry (file "~/Dropbox/org/REFILE.org")
-                       "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+                       "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n%x" :clock-in t :clock-resume t :immediate-finish t)
                       ("n" "note" entry (file "~/Dropbox/org/REFILE.org")
                        "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
                       ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/Journal.org")
@@ -271,8 +277,10 @@
                        "* TODO Review %c\n%U\n" :immediate-finish t)
                       ("m" "Meeting" entry (file "~/Dropbox/org/REFILE.org")
                        "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                      ("p" "Phone call" entry (file "~/Dropbox/org/REFILE.org")
-                       "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+                      ("p" "Project" entry (file "~/Dropbox/org/REFILE.org")
+                       (file "~/Dropbox/org/ProjectTemplate.org") :clock-in t :clock-resume t)
+                      ("W" "Weekly Review" entry (file+olp+datetree "~/Dropbox/org/Journal.org" )
+                       (file "~/Dropbox/org/WeeklyReviewTemplate.org") :clock-in t :clock-resume t)
                       ("h" "Habit" entry (file "~/Dropbox/org/REFILE.org")
                        "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
@@ -313,8 +321,7 @@
         (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                          (org-agenda-files :maxlevel . 9))))
 
-        ; Use full outline paths for refile targets - we file directly with IDO
-        (setq org-refile-use-outline-path 'file)
+        ; Use full outline paths for refile targets - we file directly with IDO          (setq org-refile-use-outline-path 'file)
 
         ; Targets complete directly with HELM
         (setq org-outline-path-complete-in-steps nil)

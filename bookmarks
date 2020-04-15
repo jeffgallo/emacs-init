@@ -4,17 +4,17 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored-marker"
  (filename . "~/Dropbox/org/TODO.org")
- (front-context-string . "** TODO Play a v")
- (rear-context-string . "3-08 Fri 21:06]\n")
- (position . 23910))
+ (front-context-string . "*** TODO configu")
+ (rear-context-string . "2-04 Tue 00:00]\n")
+ (position . 29150))
 ("org-refile-last-stored"
- (filename . "~/Dropbox/org/TODO.org")
- (front-context-string . "** TODO make tim")
- (rear-context-string . "1-01 Wed 10:00>\n")
- (position . 1223))
+ (filename . "~/Dropbox/org/Review.org")
+ (front-context-string . "*** TODO So I\342\200\231m ")
+ (rear-context-string . "dent. Now what?\n")
+ (position . 43236))
 ("org-capture-last-stored"
- (filename . "~/Dropbox/org/Journal.org")
- (front-context-string . "**** I had a dec")
- (rear-context-string . "01-01 Wednesday\n")
- (position . 276826))
+ (filename . "~/Dropbox/org/REFILE.org")
+ (front-context-string . "* TODO Make a li")
+ (rear-context-string . "t configuration\n")
+ (position . 116))
 )

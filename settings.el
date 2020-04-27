@@ -1326,12 +1326,12 @@
   (js2r-add-keybindings-with-prefix "C-c C-r")
   (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
   (use-package tern )
-  (use-package company-tern :requires tern)
+  (use-package tern-auto-complete :requires tern)
   (add-hook 'js-mode-hook (lambda () (tern-mode t)))
   (eval-after-load 'tern
      '(progn
-        (require 'company-tern)
-        ))
+        (require 'tern-auto-complete)
+        (tern-ac-setup)))
   (defun delete-tern-process ()
     (interactive)
     (delete-process "Tern"))
@@ -1355,3 +1355,78 @@
 (use-package php-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 ;; php mode:1 ends here
+
+;; [[file:~/.emacs.d/settings.org::*elfeed][elfeed:1]]
+(use-package elfeed 
+     :ensure t
+     :bind (:map elfeed-search-mode-map
+                ("A" . elfeed-show-all)
+                ("T" . elfeed-show-tech)
+                ("N" . elfeed-show-news)
+                ("E" . elfeed-show-emacs)
+                ("D" . elfeed-show-daily)
+                ("q" . elfeed-save-db-and-bury)))
+
+  ;; use an org file to organise feeds
+  (use-package elfeed-org
+    :ensure t
+    :config
+    (elfeed-org)
+    (setq rmh-elfeed-org-files (list "~/Dropbox/elfeed.org")))
+   
+   (add-hook 'elfeed-search-mode-hook 'turn-off-evil-mode)
+  (add-hook 'elfeed-show-mode-hook 'turn-off-evil-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; elfeed feed reader                                                     ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;shortcut functions
+  (defun elfeed-show-all ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-all"))
+(defun elfeed-show-tech ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-tech"))
+(defun elfeed-show-news ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-news"))
+  (defun elfeed-show-emacs ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-emacs"))
+  (defun elfeed-show-daily ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-daily"))
+
+  ;;functions to support syncing .elfeed between machines
+  ;;makes sure elfeed reads index from disk before launching
+  (defun elfeed-load-db-and-open ()
+    "Wrapper to load the elfeed db from disk before opening"
+    (interactive)
+    (elfeed-db-load)
+    (elfeed)
+    (elfeed-search-update--force))
+
+  ;;write to disk when quiting
+  (defun elfeed-save-db-and-bury ()
+    "Wrapper to save the elfeed db to disk before burying buffer"
+    (interactive)
+    (elfeed-db-save)
+    (quit-window))
+
+;; set EWW as default browser
+ (setq browse-url-browser-function 'eww-browse-url)
+
+;; browse article in gui browser instead of eww
+(defun bjm/elfeed-show-visit-gui ()
+  "Wrapper for elfeed-show-visit to use gui browser instead of eww"
+  (interactive)
+  (let ((browse-url-generic-program "/usr/bin/open"))
+    (elfeed-show-visit t)))
+
+(define-key elfeed-show-mode-map (kbd "B") 'bjm/elfeed-show-visit-gui)
+;; elfeed:1 ends here

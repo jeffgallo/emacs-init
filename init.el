@@ -46,9 +46,9 @@
  '(display-time-default-load-average 0)
  '(display-time-load-average-threshold 0.1)
  '(display-time-mode t)
- '(elfeed-feeds
-   (quote
-    ("www.slate.com/feeds/all.rss" "www.theverge.com/rss/index.xml")))
+;; '(elfeed-feeds
+;;   (quote
+;;    ("www.slate.com/feeds/all.rss" "www.theverge.com/rss/index.xml")))
  '(inhibit-startup-screen t)
  '(org-agenda-files
    (quote

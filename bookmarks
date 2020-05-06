@@ -2,19 +2,39 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-capture-last-stored-marker"
+(("elfeed-news"
+ (location . "@2-weeks-ago +unread +news")
+ (tags "news" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("elfeed-tech"
+ (location . "@2-weeks-ago +unread +tech")
+ (tags "tech" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("elfeed-daily"
+ (location . "@2-weeks-ago +unread +daily")
+ (tags "daily" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("elfeed-emacs"
+ (location . "@2-weeks-ago +unread +emacs")
+ (tags "emacs" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("elfeed-all"
+ (location . "@2-weeks-ago +unread ")
+ (tags "unread")
+ (handler . elfeed-search-bookmark-handler))
+("org-capture-last-stored-marker"
  (filename . "~/Dropbox/org/TODO.org")
- (front-context-string . "** TODO Play a v")
- (rear-context-string . "3-08 Fri 21:06]\n")
- (position . 23910))
+ (front-context-string . "*** TODO configu")
+ (rear-context-string . "2-04 Tue 00:00]\n")
+ (position . 29150))
 ("org-refile-last-stored"
- (filename . "~/Dropbox/org/TODO.org")
- (front-context-string . "** TODO make tim")
- (rear-context-string . "1-01 Wed 10:00>\n")
- (position . 1223))
+ (filename . "~/Dropbox/org/Review.org")
+ (front-context-string . "*** TODO So I\342\200\231m ")
+ (rear-context-string . "dent. Now what?\n")
+ (position . 43236))
 ("org-capture-last-stored"
- (filename . "~/Dropbox/org/Journal.org")
- (front-context-string . "**** I had a dec")
- (rear-context-string . "01-01 Wednesday\n")
- (position . 276826))
+ (filename . "~/Dropbox/org/REFILE.org")
+ (front-context-string . "* TODO Node JS c")
+ (rear-context-string . "4-12 Sun 18:58]\n")
+ (position . 431))
 )

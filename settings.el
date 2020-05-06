@@ -48,6 +48,12 @@
 (add-hook 'org-mode-hook 'flyspell-mode)
 ;; flyspell:1 ends here
 
+;; [[file:~/.emacs.d/settings.org::*org-Download][org-Download:1]]
+(use-package org-download)
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-download-enable)
+;; org-Download:1 ends here
+
 ;; [[file:~/.emacs.d/settings.org::*interface%20tweaks][interface tweaks:1]]
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<f5>") 'revert-buffer)
@@ -262,7 +268,7 @@
               (quote (("t" "todo" entry (file "~/Dropbox/org/REFILE.org")
                        "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
                       ("r" "respond" entry (file "~/Dropbox/org/REFILE.org")
-                       "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+                       "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n%x" :clock-in t :clock-resume t :immediate-finish t)
                       ("n" "note" entry (file "~/Dropbox/org/REFILE.org")
                        "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
                       ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/Journal.org")
@@ -271,8 +277,10 @@
                        "* TODO Review %c\n%U\n" :immediate-finish t)
                       ("m" "Meeting" entry (file "~/Dropbox/org/REFILE.org")
                        "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                      ("p" "Phone call" entry (file "~/Dropbox/org/REFILE.org")
-                       "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+                      ("p" "Project" entry (file "~/Dropbox/org/REFILE.org")
+                       (file "~/Dropbox/org/ProjectTemplate.org") :clock-in t :clock-resume t)
+                      ("W" "Weekly Review" entry (file+olp+datetree "~/Dropbox/org/Journal.org" )
+                       (file "~/Dropbox/org/WeeklyReviewTemplate.org") :clock-in t :clock-resume t)
                       ("h" "Habit" entry (file "~/Dropbox/org/REFILE.org")
                        "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
@@ -313,8 +321,7 @@
         (setq org-refile-targets (quote ((nil :maxlevel . 9)
                                          (org-agenda-files :maxlevel . 9))))
 
-        ; Use full outline paths for refile targets - we file directly with IDO
-        (setq org-refile-use-outline-path 'file)
+        ; Use full outline paths for refile targets - we file directly with IDO          (setq org-refile-use-outline-path 'file)
 
         ; Targets complete directly with HELM
         (setq org-outline-path-complete-in-steps nil)
@@ -1319,12 +1326,12 @@
   (js2r-add-keybindings-with-prefix "C-c C-r")
   (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
   (use-package tern )
-  (use-package company-tern :requires tern)
+  (use-package tern-auto-complete :requires tern)
   (add-hook 'js-mode-hook (lambda () (tern-mode t)))
   (eval-after-load 'tern
      '(progn
-        (require 'company-tern)
-        ))
+        (require 'tern-auto-complete)
+        (tern-ac-setup)))
   (defun delete-tern-process ()
     (interactive)
     (delete-process "Tern"))
@@ -1348,3 +1355,78 @@
 (use-package php-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 ;; php mode:1 ends here
+
+;; [[file:~/.emacs.d/settings.org::*elfeed][elfeed:1]]
+(use-package elfeed 
+     :ensure t
+     :bind (:map elfeed-search-mode-map
+                ("A" . elfeed-show-all)
+                ("T" . elfeed-show-tech)
+                ("N" . elfeed-show-news)
+                ("E" . elfeed-show-emacs)
+                ("D" . elfeed-show-daily)
+                ("q" . elfeed-save-db-and-bury)))
+
+  ;; use an org file to organise feeds
+  (use-package elfeed-org
+    :ensure t
+    :config
+    (elfeed-org)
+    (setq rmh-elfeed-org-files (list "~/Dropbox/elfeed.org")))
+   
+   (add-hook 'elfeed-search-mode-hook 'turn-off-evil-mode)
+  (add-hook 'elfeed-show-mode-hook 'turn-off-evil-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; elfeed feed reader                                                     ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;shortcut functions
+  (defun elfeed-show-all ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-all"))
+(defun elfeed-show-tech ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-tech"))
+(defun elfeed-show-news ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-news"))
+  (defun elfeed-show-emacs ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-emacs"))
+  (defun elfeed-show-daily ()
+    (interactive)
+    (bookmark-maybe-load-default-file)
+    (bookmark-jump "elfeed-daily"))
+
+  ;;functions to support syncing .elfeed between machines
+  ;;makes sure elfeed reads index from disk before launching
+  (defun elfeed-load-db-and-open ()
+    "Wrapper to load the elfeed db from disk before opening"
+    (interactive)
+    (elfeed-db-load)
+    (elfeed)
+    (elfeed-search-update--force))
+
+  ;;write to disk when quiting
+  (defun elfeed-save-db-and-bury ()
+    "Wrapper to save the elfeed db to disk before burying buffer"
+    (interactive)
+    (elfeed-db-save)
+    (quit-window))
+
+;; set EWW as default browser
+ (setq browse-url-browser-function 'eww-browse-url)
+
+;; browse article in gui browser instead of eww
+(defun bjm/elfeed-show-visit-gui ()
+  "Wrapper for elfeed-show-visit to use gui browser instead of eww"
+  (interactive)
+  (let ((browse-url-generic-program "/usr/bin/open"))
+    (elfeed-show-visit t)))
+
+(define-key elfeed-show-mode-map (kbd "B") 'bjm/elfeed-show-visit-gui)
+;; elfeed:1 ends here

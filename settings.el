@@ -219,10 +219,10 @@
         (global-set-key "\C-cb" 'org-iswitchb) 
         (global-set-key "\C-cc" 'org-capture) 
         (global-set-key (kbd "C-c o") 
-                        (lambda () (interactive) (find-file "~/Dropbox/org/GTD.org")))
+                        (lambda () (interactive) (find-file "~/Nextcloud/org/TODO.org")))
         (setq org-log-done t)
-        (setq org-directory "~/Dropbox/org")
-        (setq org-default-notes-file "~/Dropbox/org/REFILE.org")
+        (setq org-directory "~/Nextcloud/org")
+        (setq org-default-notes-file "~/Nextcloud/org/REFILE.org")
 
       ;; add BBDB for use in phone call capture
       (use-package bbdb)
@@ -265,23 +265,23 @@
 
         ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
         (setq org-capture-templates
-              (quote (("t" "todo" entry (file "~/Dropbox/org/REFILE.org")
+              (quote (("t" "todo" entry (file "~/Nextcloud/org/REFILE.org")
                        "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                      ("r" "respond" entry (file "~/Dropbox/org/REFILE.org")
+                      ("r" "respond" entry (file "~/Nextcloud/org/REFILE.org")
                        "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n%x" :clock-in t :clock-resume t :immediate-finish t)
-                      ("n" "note" entry (file "~/Dropbox/org/REFILE.org")
+                      ("n" "note" entry (file "~/Nextcloud/org/REFILE.org")
                        "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                      ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/Journal.org")
+                      ("j" "Journal" entry (file+olp+datetree "~/Nextcloud/org/Journal.org")
                        "* %?\n%U\n" :clock-in t :clock-resume t)
-                      ("w" "org-protocol" entry (file "~/Dropbox/org/REFILE.org")
+                      ("w" "org-protocol" entry (file "~/Nextcloud/org/REFILE.org")
                        "* TODO Review %c\n%U\n" :immediate-finish t)
-                      ("m" "Meeting" entry (file "~/Dropbox/org/REFILE.org")
+                      ("m" "Meeting" entry (file "~/Nextcloud/org/REFILE.org")
                        "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                      ("p" "Project" entry (file "~/Dropbox/org/REFILE.org")
-                       (file "~/Dropbox/org/ProjectTemplate.org") :clock-in t :clock-resume t)
-                      ("W" "Weekly Review" entry (file+olp+datetree "~/Dropbox/org/Journal.org" )
-                       (file "~/Dropbox/org/WeeklyReviewTemplate.org") :clock-in t :clock-resume t)
-                      ("h" "Habit" entry (file "~/Dropbox/org/REFILE.org")
+                      ("p" "Project" entry (file "~/Nextcloud/org/REFILE.org")
+                       (file "~/Nextcloud/org/ProjectTemplate.org") :clock-in t :clock-resume t)
+                      ("W" "Weekly Review" entry (file+olp+datetree "~/Nextcloud/org/Journal.org" )
+                       (file "~/Nextcloud/org/WeeklyReviewTemplate.org") :clock-in t :clock-resume t)
+                      ("h" "Habit" entry (file "~/Nextcloud/org/REFILE.org")
                        "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
         ;; KEYWORDS    
@@ -1121,7 +1121,7 @@
 
       ;; Add Diary info to agenda
       (setq org-agenda-include-diary t)
-      (setq org-agenda-diary-file "~/Dropbox/org/diary.org")
+      (setq org-agenda-diary-file "~/Nextcloud/org/diary.org")
       (setq org-agenda-insert-diary-extract-time t)
 
       ;; Include agenda archive files when searching for things
@@ -1372,7 +1372,7 @@
     :ensure t
     :config
     (elfeed-org)
-    (setq rmh-elfeed-org-files (list "~/Dropbox/elfeed.org")))
+    (setq rmh-elfeed-org-files (list "~/Nextcloud/elfeed.org")))
    
    (add-hook 'elfeed-search-mode-hook 'turn-off-evil-mode)
   (add-hook 'elfeed-show-mode-hook 'turn-off-evil-mode)

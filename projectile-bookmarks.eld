@@ -1,1 +1,1 @@
-("~/Repos/realtime-rethink-lessons/" "~/.emacs.d/" "~/Repos/wine-tally/" "~/Repos/AccessControlScanner_RN/" "~/Repos/STRMLN_Site/" "~/Repos/TeamClock/" "~/Repos/my-blog/" "~/Repos/tnew7/" "~/Repos/qmk_firmware/" "~/Repos/ntf_site_gatsby/" "~/Repos/ACAOnlineFrontEnd/")
+("~/.emacs.d/" "~/Repos/realtime-rethink-lessons/" "~/Repos/wine-tally/" "~/Repos/AccessControlScanner_RN/" "~/Repos/STRMLN_Site/" "~/Repos/TeamClock/" "~/Repos/my-blog/" "~/Repos/tnew7/" "~/Repos/qmk_firmware/" "~/Repos/ntf_site_gatsby/" "~/Repos/ACAOnlineFrontEnd/")

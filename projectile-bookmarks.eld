@@ -1,1 +1,1 @@
-("~/.emacs.d/")
+("~/.emacs.d/" "~/Repos/shadow-cljs-explore/" "~/Repos/braveClojure/my-clojure-app/")

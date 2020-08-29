@@ -19,3 +19,8 @@ source ~/.bashrc
 dired
 dired ~/Repos/TeamClock
 exit
+cd ../Documents
+(make-directory "./make")
+ls
+rm -r make
+ls

@@ -41,7 +41,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (deeper-blue)))
  '(display-time-day-and-date t)
  '(display-time-default-load-average 0)
  '(display-time-load-average-threshold 0.1)
@@ -50,9 +49,12 @@
  '(org-agenda-files
    (quote
     ("~/Nextcloud/org/Review.org" "~/Nextcloud/org/TODO.org" "~/Nextcloud/org/Journal.org" "~/Nextcloud/org/REFILE.org")))
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-crypt org-gnus org-habit org-id org-info org-jsinfo org-habit org-inlinetask org-irc org-mew org-mhe org-protocol org-rmail org-vm org-wl org-w3m)))
  '(package-selected-packages
    (quote
-    (helm-org org-web-tools elfeed-org elfeed company-tern company-tabnine company company-mode ac-js2 magit-popup php-mode rjsx-mode impatient-mode ac-emmet typescript-mode tern auto-complete evil-visual-mark-mode evil-indent-textobject evil-surround evil-leader helm helm-dash eslint-fix powerline-evil rw-ispell emmet-mode web-mode paredit flycheck-clojure flycheck-gradle flycheck-popup-tip flyparens helm-flycheck helm-flyspell rainbow-delimiters rainbow-mode paren-completer paren-face projectile cider clojure-mode helm-projectile helm-themes spotify which-key use-package ace-window mu4e-maildirs-extension evil-tutor flycheck flyspell-correct-helm)))
+    (org-roam-bibtex org-roam-server company-org-roam org-roam helm-org org-web-tools elfeed-org elfeed company-tern company-tabnine company company-mode ac-js2 magit-popup php-mode rjsx-mode impatient-mode ac-emmet typescript-mode tern auto-complete evil-visual-mark-mode evil-indent-textobject evil-surround evil-leader helm helm-dash eslint-fix powerline-evil rw-ispell emmet-mode web-mode paredit flycheck-clojure flycheck-gradle flycheck-popup-tip flyparens helm-flycheck helm-flyspell rainbow-delimiters rainbow-mode paren-completer paren-face projectile cider clojure-mode helm-projectile helm-themes spotify which-key use-package ace-window mu4e-maildirs-extension evil-tutor flycheck flyspell-correct-helm)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values
    (quote
